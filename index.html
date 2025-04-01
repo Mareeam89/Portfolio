@@ -4,78 +4,78 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Church Website</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="styles.css">
+    <script defer src="script.js"></script>
 </head>
 <body>
-
     <!-- Navigation -->
-    <nav>
-        <div class="logo">Teasured Life Ministry</div>
+    <nav class="navbar">
+        <div class="logo">Treasured Life Family Church</div>
         <ul>
             <li><a href="#welcome">Home</a></li>
             <li><a href="#sermons">Sermons</a></li>
-            <li><a href="#devotionals">Devotionals</a></li>
-            <li><a href="#announcements">Announcements</a></li>
+            <li><a href="#devotional">Devotionals</a></li>
+            <li><a href="#events">Events</a></li>
             <li><a href="#contact">Contact</a></li>
             <li><a href="admin.html">Admin</a></li>
         </ul>
     </nav>
 
     <!-- Welcome Section -->
-    <section id="welcome">
-        <h1>Welcome to Treasured Life Family Church</h1>
-        <p>Bringing faith closer to you through sermons, devotionals, and community events.</p>
+    <section id="welcome" class="welcome">
+        <h1>Welcome to Our Church</h1>
+        <p>We are a people with passion for God and compassion for men.</p>
     </section>
 
     <!-- Sermons Section -->
-    <section id="sermons">
-        <h2>Latest Sermons</h2>
+    <section id="sermons" class="sermons">
+        <h2>It is Written</h2>
+	 <h2>Intentional Parenting</h2>
+	  <h2>Live by Faith</h2>
         <audio controls>
-            <source src="assets/audio/sermon.mp3" type="audio/mp3">
-            Your browser does not support the audio tag.
+            <source src="sermon.mp3" type="audio/mp3">
+            Your browser does not support the audio element.
         </audio>
     </section>
 
-    <!-- Devotionals Section -->
-    <section id="devotionals">
-        <h2>Daily Devotionals</h2>
-        <div class="card-container">
-            <div class="card">
-                <h3>Faith and Strength</h3>
-                <p>Discover how faith guides our daily lives...</p>
-                <button>Read More</button>
-            </div>
-            <div class="card">
-                <h3>Hope in Hard Times</h3>
-                <p>Finding strength through challenges...</p>
-                <button>Read More</button>
-            </div>
+    <!-- Devotional Section -->
+    <section id="devotional" class="devotional">
+        <h2>Awaken the sleeping giant</h2>
+	 <h2>Boundless Gratitude</h2>
+	  <h2>Growth Mindset</h2>
+	   <h2>Flourish in Prayers</h2>
+	    <h2>Whispers in the Wilderness</h2>
+	     <h2>Baby Steps</h2>
+	      <h2>Anxious for Nothing</h2>
+        <div class="devotional-card">
+            <h3>Daily Blessings</h3>
+            <p>Find inspiration and strength in our daily devotionals.</p>
         </div>
     </section>
 
-    <!-- Announcements & Events -->
-    <section id="announcements">
-        <h2>Church Announcements</h2>
+    <!-- Announcements & Events Section -->
+    <section id="events" class="events">
+        <h2>Upcoming Events</h2>
         <ul>
-            <li>🌟 Sunday Worship Service at 9:00 AM</li>
-            <li>📖 Bible Study every Tuesday at 5:30 PM</li>
-            <li>🎉 Community Outreach - April 5th</li>
-	    <li> Church Unusual Service - CUS every Saturday at 6:00 PM</li>
+            <li><strong>Thanksgiving Sunday Service:</strong> Every Sunday at 9 AM</li>
+            <li><strong>Bible Study:</strong> Tuesdays at 5:30 PM</li>
+	    <li><strong>Church Unusual Service:</strong> Saturdays at 6 PM</li>
+	     <li><strong>Easter Celebration Service:</strong> 19th April at 9 AM</li>
+	      <li><strong>Teens Camp Meeting:</strong> 26th April at 12 PM</li>
         </ul>
     </section>
 
     <!-- Contact Form -->
-    <section id="contact">
-        <h2>Contact Us</h2>
+    <section id="contact" class="contact">
+        <h2>Contact Us via our Social Media Handles or Visit Us at Shepherd Kings Plaza, beside Remaco Filling Station, Police Signboard, Lugbe Abuja, Nigeria.</h2>
         <form>
-            <input type="text" placeholder="Shepherd Kings Plaza, beside Remaco Filling Station, Lugbe Abuja, Nigeria" required>
-            <input type="email" placeholder="treasuredlifeministry@gmail.com" required>
-            <textarea placeholder="Your Message"></textarea>
-            <button type="submit">We would like to hear from you</button>
+            <input type="text" placeholder="Your Name" required>
+            <input type="email" placeholder="Your Email" required>
+            <textarea placeholder="Your Message" required></textarea>
+            <button type="submit">Send</button>
         </form>
     </section>
 
-    <script src="script.js"></script>
 </body>
 </html>
 

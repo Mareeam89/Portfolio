@@ -2,74 +2,72 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f5f5f5;
-    color: #333;
+    background-color: white;
+    color: #004d40;
 }
 
-nav {
-    background: #2c3e50;
-    padding: 15px;
+/* Navigation */
+.navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-}
-
-nav .logo {
+    background-color: #00796b;
+    padding: 15px;
     color: white;
-    font-size: 24px;
-    font-weight: bold;
 }
 
-nav ul {
+.navbar ul {
     list-style: none;
-    padding: 0;
     display: flex;
+    gap: 15px;
 }
 
-nav ul li {
-    margin: 0 15px;
-}
-
-nav ul li a {
-    text-decoration: none;
+.navbar ul li a {
     color: white;
+    text-decoration: none;
 }
 
-section {
-    padding: 50px;
+/* Welcome Section */
+.welcome {
     text-align: center;
+    padding: 50px;
+    background: #e0f2f1;
 }
 
-h2 {
-    color: #2c3e50;
+/* Sermons */
+.sermons {
+    text-align: center;
+    padding: 30px;
 }
 
-.card-container {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
+/* Devotional */
+.devotional {
+    padding: 30px;
+    background: #f1f8e9;
 }
 
-.card {
+.devotional-card {
     background: white;
     padding: 20px;
-    border-radius: 8px;
-    width: 200px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    border-radius: 5px;
 }
 
-button {
-    background: #2c3e50;
-    color: white;
-    padding: 10px;
-    border: none;
-    cursor: pointer;
+/* Events */
+.events {
+    padding: 30px;
 }
 
-form input, form textarea {
-    display: block;
-    width: 100%;
-    margin-bottom: 10px;
+/* Contact */
+.contact {
+    text-align: center;
+    padding: 30px;
+    background: #e0f2f1;
+}
+
+.contact form input, 
+.contact form textarea {
+    width: 80%;
+    margin: 10px;
     padding: 10px;
 }
 
