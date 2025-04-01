@@ -4,31 +4,78 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Church Website</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
-        <h1>Welcome to Our Church</h1>
-        <nav>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="sermons.html">Sermons</a></li>
-                <li><a href="devotionals.html">Devotionals</a></li>
-                <li><a href="announcements.html">Announcements</a></li>
-                <li><a href="contact.html">Contact</a></li>
-                <li><a href="admin.html">Admin</a></li>
-            </ul>
-        </nav>
-    </header>
 
-    <section class="hero">
-        <h2>Join Us for Worship</h2>
-        <p>Discover inspiring sermons and devotionals to guide your faith journey.</p>
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">Teasured Life Ministry</div>
+        <ul>
+            <li><a href="#welcome">Home</a></li>
+            <li><a href="#sermons">Sermons</a></li>
+            <li><a href="#devotionals">Devotionals</a></li>
+            <li><a href="#announcements">Announcements</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li><a href="admin.html">Admin</a></li>
+        </ul>
+    </nav>
+
+    <!-- Welcome Section -->
+    <section id="welcome">
+        <h1>Welcome to Treasured Life Family Church</h1>
+        <p>Bringing faith closer to you through sermons, devotionals, and community events.</p>
     </section>
 
-    <footer>
-        <p>© 2025 Our Church. All rights reserved.</p>
-    </footer>
+    <!-- Sermons Section -->
+    <section id="sermons">
+        <h2>Latest Sermons</h2>
+        <audio controls>
+            <source src="assets/audio/sermon.mp3" type="audio/mp3">
+            Your browser does not support the audio tag.
+        </audio>
+    </section>
+
+    <!-- Devotionals Section -->
+    <section id="devotionals">
+        <h2>Daily Devotionals</h2>
+        <div class="card-container">
+            <div class="card">
+                <h3>Faith and Strength</h3>
+                <p>Discover how faith guides our daily lives...</p>
+                <button>Read More</button>
+            </div>
+            <div class="card">
+                <h3>Hope in Hard Times</h3>
+                <p>Finding strength through challenges...</p>
+                <button>Read More</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Announcements & Events -->
+    <section id="announcements">
+        <h2>Church Announcements</h2>
+        <ul>
+            <li>🌟 Sunday Worship Service at 9:00 AM</li>
+            <li>📖 Bible Study every Tuesday at 5:30 PM</li>
+            <li>🎉 Community Outreach - April 5th</li>
+	    <li> Church Unusual Service - CUS every Saturday at 6:00 PM</li>
+        </ul>
+    </section>
+
+    <!-- Contact Form -->
+    <section id="contact">
+        <h2>Contact Us</h2>
+        <form>
+            <input type="text" placeholder="Shepherd Kings Plaza, beside Remaco Filling Station, Lugbe Abuja, Nigeria" required>
+            <input type="email" placeholder="treasuredlifeministry@gmail.com" required>
+            <textarea placeholder="Your Message"></textarea>
+            <button type="submit">We would like to hear from you</button>
+        </form>
+    </section>
+
+    <script src="script.js"></script>
 </body>
 </html>
 
