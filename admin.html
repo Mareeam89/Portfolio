@@ -4,33 +4,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
-        <h1>Admin Dashboard</h1>
-    </header>
 
-    <section class="admin-panel">
-        <h2>Manage Content</h2>
+    <h1>Admin Dashboard</h1>
 
-        <div class="admin-section">
-            <h3>Add New Sermon</h3>
-            <input type="text" placeholder="Sermon Title">
-            <input type="file">
-            <button>Add Sermon</button>
-        </div>
+    <!-- CRUD for Sermons -->
+    <h2>Manage Sermons</h2>
+    <input type="text" placeholder="Sermon Title">
+    <button>Add Sermon</button>
 
-        <div class="admin-section">
-            <h3>Add New Devotional</h3>
-            <textarea placeholder="Devotional Content"></textarea>
-            <button>Add Devotional</button>
-        </div>
-    </section>
+    <ul id="sermon-list">
+        <li>Sermon 1 <button>Delete</button></li>
+        <li>Sermon 2 <button>Delete</button></li>
+    </ul>
 
-    <footer>
-        <p>© 2025 Our Church. All rights reserved.</p>
-    </footer>
+    <script>
+        document.querySelector('button').addEventListener('click', function() {
+            let list = document.getElementById('sermon-list');
+            let newSermon = document.createElement('li');
+            newSermon.innerText = "New Sermon";
+            let deleteBtn = document.createElement('button');
+            deleteBtn.innerText = "Delete";
+            deleteBtn.onclick = function() { list.removeChild(newSermon); };
+            newSermon.appendChild(deleteBtn);
+            list.appendChild(newSermon);
+        });
+    </script>
+
 </body>
 </html>
 
