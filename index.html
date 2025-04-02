@@ -1,268 +1,1322 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Treasured Life Website</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f8f9fa;
-            color: #333;
-        }
-        nav {
-            background-color: teal;
-            padding: 15px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            color: white;
-        }
-        nav ul {
-            list-style: none;
-            display: flex;
-            gap: 15px;
-        }
-        nav a {
-            color: white;
-            text-decoration: none;
-        }
-        section {
-            padding: 40px;
-            text-align: center;
-        }
-        .sermons-container, .devotional-container, .events-container {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            flex-wrap: wrap;
-        }
-        .card {
-            background: white;
-            padding: 20px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            width: 300px;
-            border-radius: 8px;
-        }
-        form {
-            display: flex;
-            flex-direction: column;
-            max-width: 400px;
-            margin: auto;
-        }
-        input, textarea, button {
-            margin: 10px 0;
-            padding: 10px;
-        }
-        button {
-            background-color: teal;
-            color: white;
-            border: none;
-            cursor: pointer;
-        }
-    </style>
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            loadContent();
-        });
-        
-        function loadContent() {
-            const sermonsContainer = document.querySelector(".sermons-container");
-            const devotionalContainer = document.querySelector(".devotional-container");
-            const eventsContainer = document.querySelector(".events-container");
-            
-            const sampleContent = [
-                { title: "Sunday Message", description: "The Knowlegde of God." },
-                { title: "Daily Devotion", description: "Awaken the Sleeping Giant." },
-                { title: "Upcoming Event", description: "Sunday Celebration Service: Every Sunday by 9 AM." }
-            ];
-            
-            sampleContent.forEach(item => {
-                const card = document.createElement("div");
-                card.className = "card";
-                card.innerHTML = `<h3>${item.title}</h3><p>${item.description}</p>`;
-                if (item.title.includes("Sermon")) {
-                    sermonsContainer.appendChild(card);
-                } else if (item.title.includes("Devotion")) {
-                    devotionalContainer.appendChild(card);
-                } else {
-                    eventsContainer.appendChild(card);
-                }
-            });
-        }
-        
-        function addContent() {
-            const adminPanel = document.getElementById("content-management");
-            const newItem = document.createElement("div");
-            newItem.className = "card";
-            newItem.innerHTML = `<h3>New Content</h3><p>Editable content.</p>`;
-            adminPanel.appendChild(newItem);
-        }
-    </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Treasured Life Ministry</title>
+  <meta name="description" content="A centralized hub for sermons, devotionals, and spiritual resources to nurture your daily walk with Christ." />
+  <meta name="author" content="TreasuredLife" />
+
+  <style>
+    /* Import fonts */
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap');
+
+    /* Base styles */
+    :root {
+      --background: 250 33% 99%;
+      --foreground: 222.2 84% 4.9%;
+      --card: 0 0% 100%;
+      --card-foreground: 222.2 84% 4.9%;
+      --popover: 0 0% 100%;
+      --popover-foreground: 222.2 84% 4.9%;
+      --primary: 262 83% 58%;
+      --primary-foreground: 210 40% 98%;
+      --secondary: 262 83% 96%;
+      --secondary-foreground: 262 83% 58%;
+      --muted: 210 40% 96.1%;
+      --muted-foreground: 215.4 16.3% 46.9%;
+      --accent: 262 83% 96%;
+      --accent-foreground: 222.2 47.4% 11.2%;
+      --destructive: 0 84.2% 60.2%;
+      --destructive-foreground: 210 40% 98%;
+      --border: 214.3 31.8% 91.4%;
+      --input: 214.3 31.8% 91.4%;
+      --ring: 262 83% 58%;
+      --radius: 0.5rem;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: hsl(var(--background));
+      color: hsl(var(--foreground));
+      line-height: 1.5;
+      overflow-x: hidden;
+      width: 100%;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Playfair Display', serif;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+
+    /* Utility classes */
+    .bg-white {
+      background-color: white;
+    }
+
+    .flex {
+      display: flex;
+    }
+
+    .flex-col {
+      flex-direction: column;
+    }
+
+    .items-center {
+      align-items: center;
+    }
+
+    .justify-between {
+      justify-content: space-between;
+    }
+
+    .justify-center {
+      justify-content: center;
+    }
+    
+    .space-between {
+      justify-content: space-between;
+    }
+
+    .gap-2 {
+      gap: 0.5rem;
+    }
+
+    .gap-3 {
+      gap: 0.75rem;
+    }
+        .gap-4 {
+      gap: 1rem;
+    }
+
+    .gap-6 {
+      gap: 1.5rem;
+    }
+
+    .gap-10 {
+      gap: 2.5rem;
+    }
+
+    .gap-12 {
+      gap: 3rem;
+    }
+
+    .gap-20 {
+      gap: 5rem;
+    }
+
+    .p-2 {
+      padding: 0.5rem;
+    }
+
+    .p-4 {
+      padding: 1rem;
+    }
+
+    .p-6 {
+      padding: 1.5rem;
+    }
+
+    .p-8 {
+      padding: 2rem;
+    }
+
+    .py-2 {
+      padding-top: 0.5rem;
+      padding-bottom: 0.5rem;
+    }
+
+    .py-4 {
+      padding-top: 1rem;
+      padding-bottom: 1rem;
+    }
+
+    .py-6 {
+      padding-top: 1.5rem;
+      padding-bottom: 1.5rem;
+    }
+
+    .py-8 {
+      padding-top: 2rem;
+      padding-bottom: 2rem;
+    }
+
+    .py-16 {
+      padding-top: 4rem;
+      padding-bottom: 4rem;
+    }
+
+    .px-2 {
+      padding-left: 0.5rem;
+      padding-right: 0.5rem;
+    }
+
+    .px-4 {
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+
+    .px-6 {
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+    }
+
+    .px-8 {
+      padding-left: 2rem;
+      padding-right: 2rem;
+    }
+
+    .pt-4 {
+      padding-top: 1rem;
+    }
+
+    .pt-8 {
+      padding-top: 2rem;
+    }
+
+    .pt-16 {
+      padding-top: 4rem;
+    }
+    
+    .pt-32 {
+      padding-top: 8rem;
+    }
+
+    .pb-4 {
+      padding-bottom: 1rem;
+    }
+
+    .pb-8 {
+      padding-bottom: 2rem;
+    }
+
+    .pb-16 {
+      padding-bottom: 4rem;
+    }
+
+    .my-4 {
+      margin-top: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .mb-1 {
+      margin-bottom: 0.25rem;
+    }
+
+    .mb-2 {
+      margin-bottom: 0.5rem;
+    }
+
+    .mb-3 {
+      margin-bottom: 0.75rem;
+    }
+
+    .mb-4 {
+      margin-bottom: 1rem;
+    }
+
+    .mb-6 {
+      margin-bottom: 1.5rem;
+    }
+
+    .mb-8 {
+      margin-bottom: 2rem;
+    }
+
+    .mb-12 {
+      margin-bottom: 3rem;
+    }
+
+    .mb-16 {
+      margin-bottom: 4rem;
+    }
+
+    .mt-1 {
+      margin-top: 0.25rem;
+    }
+
+    .mt-2 {
+      margin-top: 0.5rem;
+    }
+
+    .mt-4 {
+      margin-top: 1rem;
+    }
+
+    .mt-8 {
+      margin-top: 2rem;
+    }
+
+    .ml-2 {
+      margin-left: 0.5rem;
+    }
+
+    .ml-4 {
+      margin-left: 1rem;
+    }
+
+    .mr-2 {
+      margin-right: 0.5rem;
+    }
+
+    .mr-4 {
+      margin-right: 1rem;
+    }
+
+    .mx-auto {
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .mx-4 {
+      margin-left: 1rem;
+      margin-right: 1rem;
+    }
+
+    .text-center {
+      text-align: center;
+    }
+
+    .text-left {
+      text-align: left;
+    }
+
+    .text-sm {
+      font-size: 0.875rem;
+    }
+
+    .text-lg {
+      font-size: 1.125rem;
+    }
+
+    .text-xl {
+      font-size: 1.25rem;
+    }
+
+    .text-2xl {
+      font-size: 1.5rem;
+    }
+
+    .text-3xl {
+      font-size: 1.875rem;
+    }
+
+    .text-4xl {
+      font-size: 2.25rem;
+    }
+
+    .text-5xl {
+      font-size: 3rem;
+    }
+
+    .font-medium {
+      font-weight: 500;
+    }
+
+    .font-bold {
+      font-weight: 700;
+    }
+
+    .text-white {
+      color: white;
+    }
+
+    .text-gray-600 {
+      color: #4B5563;
+    }
+
+    .text-gray-700 {
+      color: #374151;
+    }
+
+    .text-gray-900 {
+      color: #111827;
+    }
+
+    .text-treasured-600 {
+      color: #7C3AED;
+    }
+
+    .text-treasured-700 {
+      color: #6D28D9;
+    }
+
+    .bg-gray-50 {
+      background-color: #F9FAFB;
+    }
+
+    .bg-gray-100 {
+      background-color: #F3F4F6;
+    }
+
+    .bg-gray-900 {
+      background-color: #111827;
+    }
+
+    .bg-treasured-100 {
+      background-color: #EDE9FE;
+    }
+
+    .border {
+      border: 1px solid;
+    }
+
+    .border-t {
+      border-top: 1px solid;
+    }
+
+    .border-b {
+      border-bottom: 1px solid;
+    }
+
+    .border-gray-100 {
+      border-color: #F3F4F6;
+    }
+
+    .border-gray-200 {
+      border-color: #E5E7EB;
+    }
+
+    .border-treasured-50 {
+      border-color: #F5F3FF;
+    }
+
+    .border-treasured-100 {
+      border-color: #EDE9FE;
+    }
+
+    .border-treasured-300 {
+      border-color: #C4B5FD;
+    }
+
+    .rounded {
+      border-radius: 0.25rem;
+    }
+
+    .rounded-md {
+      border-radius: 0.375rem;
+    }
+
+    .rounded-lg {
+      border-radius: 0.5rem;
+    }
+
+    .rounded-xl {
+      border-radius: 0.75rem;
+    }
+
+    .rounded-2xl {
+      border-radius: 1rem;
+    }
+
+    .rounded-3xl {
+      border-radius: 1.5rem;
+    }
+
+    .rounded-full {
+      border-radius: 9999px;
+    }
+
+    .h-auto {
+      height: auto;
+    }
+
+    .h-5 {
+      height: 1.25rem;
+    }
+
+    .h-10 {
+      height: 2.5rem;
+    }
+
+    .h-12 {
+      height: 3rem;
+    }
+
+    .h-14 {
+      height: 3.5rem;
+    }
+
+    .h-80 {
+      height: 20rem;
+    }
+
+    .w-2 {
+      width: 0.5rem;
+    }
+
+    .w-5 {
+      width: 1.25rem;
+    }
+
+    .w-10 {
+      width: 2.5rem;
+    }
+
+    .w-12 {
+      width: 3rem;
+    }
+
+    .w-14 {
+      width: 3.5rem;
+    }
+
+    .w-full {
+      width: 100%;
+    }
+
+    .max-w-xl {
+      max-width: 36rem;
+    }
+
+    .max-w-3xl {
+      max-width: 48rem;
+    }
+
+    .flex-1 {
+      flex: 1 1 0%;
+    }
+
+    .flex-shrink-0 {
+      flex-shrink: 0;
+    }
+
+    .grid {
+      display: grid;
+    }
+
+    .grid-cols-1 {
+      grid-template-columns: repeat(1, minmax(0, 1fr));
+    }
+
+    .grid-cols-2 {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .grid-cols-3 {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .space-y-2 > * + * {
+      margin-top: 0.5rem;
+    }
+
+    .space-y-3 > * + * {
+      margin-top: 0.75rem;
+    }
+
+    .space-y-4 > * + * {
+      margin-top: 1rem;
+    }
+
+    .absolute {
+      position: absolute;
+    }
+
+    .relative {
+      position: relative;
+    }
+
+    .fixed {
+      position: fixed;
+    }
+
+    .inset-0 {
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+    }
+
+    .top-0 {
+      top: 0;
+    }
+
+    .z-50 {
+      z-index: 50;
+    }
+
+    .z-10 {
+      z-index: 10;
+    }
+
+    .overflow-hidden {
+      overflow: hidden;
+    }
+
+    .shadow-sm {
+      box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    }
+
+    .shadow-md {
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    }
+
+    .shadow-lg {
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    }
+
+    .shadow-xl {
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    }
+
+    .shadow-treasured-100\/30 {
+      box-shadow: 0 4px 6px -1px rgba(237, 233, 254, 0.3), 0 2px 4px -1px rgba(237, 233, 254, 0.3);
+    }
+
+    .shadow-treasured-100\/50 {
+      box-shadow: 0 4px 6px -1px rgba(237, 233, 254, 0.5), 0 2px 4px -1px rgba(237, 233, 254, 0.5);
+    }
+
+    .shadow-gray-900\/20 {
+      box-shadow: 0 20px 25px -5px rgba(17, 24, 39, 0.2), 0 10px 10px -5px rgba(17, 24, 39, 0.2);
+    }
+
+    .transition-colors {
+      transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+      transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+      transition-duration: 150ms;
+    }
+
+    .transition-all {
+      transition-property: all;
+      transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+      transition-duration: 150ms;
+    }
+
+    .inline-flex {
+      display: inline-flex;
+    }
+
+    .hover\:text-treasured-600:hover {
+      color: #7C3AED;
+    }
+
+    .hover\:text-treasured-700:hover {
+      color: #6D28D9;
+    }
+
+    .hover\:bg-gray-100:hover {
+      background-color: #F3F4F6;
+    }
+
+    .hover\:shadow-lg:hover {
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    }
+
+    .group {
+      position: relative;
+    }
+
+    .group:hover .group-hover\:treasured-gradient {
+      background: linear-gradient(to right, #7C3AED, #4C1D95);
+    }
+
+    .group:hover .group-hover\:text-white {
+      color: white;
+    }
+
+    .leading-tight {
+      line-height: 1.25;
+    }
+
+    .treasured-gradient {
+      background: linear-gradient(to right, #7C3AED, #4C1D95);
+      color: white;
+    }
+
+    .text-transparent {
+      color: transparent;
+    }
+
+    .bg-clip-text {
+      -webkit-background-clip: text;
+      background-clip: text;
+    }
+
+    .secondary-gradient {
+      background: linear-gradient(to right, #EDE9FE, #DDD6FE);
+    }
+
+    .opacity-70 {
+      opacity: 0.7;
+    }
+
+    .opacity-80 {
+      opacity: 0.8;
+    }
+
+    .bg-white\/95 {
+      background-color: rgba(255, 255, 255, 0.95);
+    }
+
+    .bg-white\/10 {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .bg-white\/20 {
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .bg-gradient-to-r {
+      background-image: linear-gradient(to right, var(--tw-gradient-stops));
+    }
+
+    .bg-gradient-to-t {
+      background-image: linear-gradient(to top, var(--tw-gradient-stops));
+    }
+
+    .from-treasured-600\/40 {
+      --tw-gradient-from: rgba(124, 58, 237, 0.4);
+      --tw-gradient-to: rgba(124, 58, 237, 0);
+      --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+    }
+
+    .from-treasured-900\/50 {
+      --tw-gradient-from: rgba(76, 29, 149, 0.5);
+      --tw-gradient-to: rgba(76, 29, 149, 0);
+      --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+    }
+
+    .to-transparent {
+      --tw-gradient-to: transparent;
+    }
+
+    .bg-cover {
+      background-size: cover;
+    }
+
+    .bg-center {
+      background-position: center;
+    }
+
+    .bg-no-repeat {
+      background-repeat: no-repeat;
+    }
+
+    .backdrop-blur-md {
+      backdrop-filter: blur(12px);
+    }
+
+    .block {
+      display: block;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .aspect-video {
+      aspect-ratio: 16 / 9;
+    }
+
+    .whitespace-nowrap {
+      white-space: nowrap;
+    }
+
+    /* Media queries */
+    @media (min-width: 640px) {
+      .sm\:flex-row {
+        flex-direction: row;
+      }
+
+      .sm\:grid-cols-2 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .sm\:px-6 {
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+      }
+    }
+
+    @media (min-width: 768px) {
+      .md\:flex {
+        display: flex;
+      }
+
+      .md\:grid-cols-2 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .md\:grid-cols-3 {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .md\:hidden {
+        display: none;
+      }
+
+      .md\:h-96 {
+        height: 24rem;
+      }
+
+      .md\:px-6 {
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+      }
+
+      .md\:px-8 {
+        padding-left: 2rem;
+        padding-right: 2rem;
+      }
+
+      .md\:py-24 {
+        padding-top: 6rem;
+        padding-bottom: 6rem;
+      }
+
+      .md\:pt-40 {
+        padding-top: 10rem;
+      }
+
+      .md\:pb-24 {
+        padding-bottom: 6rem;
+      }
+
+      .md\:p-10 {
+        padding: 2.5rem;
+      }
+
+      .md\:text-xl {
+        font-size: 1.25rem;
+      }
+
+      .md\:text-3xl {
+        font-size: 1.875rem;
+      }
+
+      .md\:text-4xl {
+        font-size: 2.25rem;
+      }
+
+      .md\:text-5xl {
+        font-size: 3rem;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .lg\:flex {
+        display: flex;
+      }
+
+      .lg\:flex-row {
+        flex-direction: row;
+      }
+
+      .lg\:grid-cols-2 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .lg\:grid-cols-4 {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+
+      .lg\:justify-start {
+        justify-content: flex-start;
+      }
+
+      .lg\:text-left {
+        text-align: left;
+      }
+
+      .lg\:text-6xl {
+        font-size: 3.75rem;
+      }
+
+      .lg\:mx-0 {
+        margin-left: 0;
+        margin-right: 0;
+      }
+
+      .lg\:w-1\/2 {
+        width: 50%;
+      }
+
+      .lg\:gap-20 {
+        gap: 5rem;
+      }
+
+      .lg\:px-8 {
+        padding-left: 2rem;
+        padding-right: 2rem;
+      }
+
+      .lg\:h-\[500px\] {
+        height: 500px;
+      }
+    }
+
+    /* Additional Styles for better spacing/padding */
+    body {
+      margin: 0;
+      padding: 0;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+
+    section {
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    button,
+    a.inline-flex {
+      cursor: pointer;
+    }
+
+    .feature-card {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .cta-card {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .cta-card-content {
+      flex: 1;
+    }
+
+    .aspect-maintain {
+      position: relative;
+      width: 100%;
+    }
+
+    .aspect-maintain::before {
+      content: "";
+      display: block;
+      padding-top: 75%;
+    }
+
+    .aspect-maintain > * {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+  </style>
 </head>
 <body>
-    <nav>
-        <div class="logo">Treasured Life Ministry</div>
-        <ul>
-            <li><a href="#welcome">Welcome</a></li>
-            <li><a href="#sermons">Sermons</a></li>
-            <li><a href="#devotional">Devotional</a></li>
-            <li><a href="#events">Events</a></li>
-            <li><a href="#contact">Contact</a></li>
-            <li><a href="#admin">Admin</a></li>
-        </ul>
-    </nav>
-    
-    <section id="welcome">
-        <h1>Welcome to Treasured Life Ministry</h1>
-        <p>Greetings and blessings! We are delighted to welcome you to Treasured Life Ministry, a place where faith is nurtured, lives are transformed, and God’s love is made known. Our mission is to inspire, encourage, and equip believers to walk in the fullness of God’s purpose having a passion for God and compassion for men.
-As you explore our website, we pray that you find resources that uplift your spirit, deepen your faith, and draw you closer to Christ. Whether you're seeking biblical teachings, heartfelt devotionals, or a community of faith, know that you are valued and loved.
-May God bless you abundantly as you embark on this journey with us!
+  <!-- Header/Navbar -->
+  <header class="w-full py-4 px-4 md:px-8 border-b border-gray-100 bg-white/95 backdrop-blur-md fixed top-0 z-50">
+    <div class="container mx-auto">
+      <nav class="flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <div class="w-10 h-10 rounded-full treasured-gradient flex items-center justify-center">
+            <span class="text-white font-bold text-xl">TL</span>
+          </div>
+          <h1 class="text-xl font-bold text-gray-900">TreasuredLife</h1>
+        </div>
 
-Welcome to Treasured Life Ministry—where everybody is somebody!</p>
-    </section>
-    
-    <section id="sermons">
-        <h2>Latest Sermons</h2>
-        <div class="sermon-card">
-		<h3>Learning by Faith</h3>
-		<p>Scripture Reference: “For we walk by faith, not by sight.” — 2 Corinthians 5:7 (NKJV)
+        <!-- Desktop Menu -->
+        <div class="hidden md:flex items-center gap-6">
+          <div class="flex gap-6 text-gray-700">
+            <a href="#features" class="hover:text-treasured-700 transition-colors py-2 px-2">Features</a>
+            <a href="#about" class="hover:text-treasured-700 transition-colors py-2 px-2">About</a>
+            <a href="#contact" class="hover:text-treasured-700 transition-colors py-2 px-2">Contact</a>
+          </div>
+          <div class="flex gap-3">
+            <a href="/login" class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium text-gray-700 transition-colors hover:bg-gray-100 py-2 px-4">Log In</a>
+            <a href="/register" class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium treasured-gradient text-white transition-colors py-2 px-4">Get Started</a>
+          </div>
+        </div>
 
-Introduction
-Life is a journey of learning, and as believers, we are called to learn by faith. Faith is not just believing in God; it is trusting Him even when we do not fully understand His plans. Many times, God calls us to step into the unknown, not with a roadmap in hand, but with a heart that trusts Him completely.
+        <!-- Mobile Menu Button -->
+        <button id="menu-button" class="md:hidden text-gray-700 p-2">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+        </button>
+      </nav>
 
-1. Faith Sees Beyond the Natural
-In Hebrews 11:1, faith is described as “the substance of things hoped for, the evidence of things not seen.” This means that faith enables us to learn and grow even when we cannot see the outcome. Think of Abraham—God called him to leave his homeland and go to a place he did not know (Genesis 12:1). He learned by faith, trusting that God would guide his steps.
+      <!-- Mobile Menu (hidden by default) -->
+      <div id="mobile-menu" class="hidden md:hidden py-4 bg-white">
+        <div class="flex flex-col gap-4 text-gray-700">
+          <a href="#features" class="hover:text-treasured-700 transition-colors py-2 px-4">Features</a>
+          <a href="#about" class="hover:text-treasured-700 transition-colors py-2 px-4">About</a>
+          <a href="#contact" class="hover:text-treasured-700 transition-colors py-2 px-4">Contact</a>
+        </div>
+        <div class="flex flex-col gap-3 mt-4">
+          <a href="/login" class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium text-gray-700 transition-colors hover:bg-gray-100 py-2 px-4 w-full">Log In</a>
+          <a href="/register" class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium treasured-gradient text-white transition-colors py-2 px-4 w-full">Get Started</a>
+        </div>
+      </div>
+    </div>
+  </header>
 
-2. Faith Teaches Us Dependence on God
-Sometimes, we want to figure things out on our own, but faith teaches us to rely on God’s wisdom rather than our own understanding (Proverbs 3:5-6). When Peter stepped out of the boat to walk on water (Matthew 14:29), he was learning by faith. The moment he took his eyes off Jesus, he began to sink. Our faith grows when we fix our eyes on Christ rather than our circumstances.
+  <!-- Hero Section -->
+  <section class="pt-32 pb-16 md:pt-40 md:pb-24 px-4 md:px-6 lg:px-8">
+    <div class="container mx-auto">
+      <div class="flex flex-col lg:flex-row items-center gap-10 lg:gap-20">
+        <div class="flex-1 text-center lg:text-left">
+          <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 leading-tight">
+            <span class="block">Everyday with Jesus</span>
+            <span class="text-transparent bg-clip-text treasured-gradient">
+              Growing in Faith Together
+            </span>
+          </h1>
 
-3. Faith Requires Obedience
-True learning by faith requires action. James 2:26 reminds us that “faith without works is dead.” We cannot claim to have faith and yet refuse to obey God. When the Israelites faced the Red Sea, Moses had to step forward in obedience before the waters parted (Exodus 14:21). Faith requires movement—even when the way seems unclear.
+          <p class="text-gray-600 text-lg md:text-xl mb-8 max-w-xl mx-auto lg:mx-0">
+            A centralized hub for sermons, devotionals, and spiritual resources to nurture your daily walk with Christ.
+          </p>
 
-Conclusion
-Learning by faith means trusting God even when we do not have all the answers. It is about stepping forward in obedience, depending on His wisdom, and believing that He is working all things for our good (Romans 8:28).
+          <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+            <a href="#features" class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md treasured-gradient text-white px-8 py-6 h-auto text-lg">
+              Explore Features
+            </a>
+            <a href="/login" class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md border border-treasured-300 text-treasured-700 px-8 py-6 h-auto text-lg">
+              Admin Login
+            </a>
+          </div>
+        </div>
 
-Reflection Question:
-Where is God calling you to step out in faith today?
+        <div class="flex-1 relative">
+          <div class="w-full h-80 md:h-96 lg:h-[500px] rounded-3xl overflow-hidden secondary-gradient">
+            <div class="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-70 rounded-3xl" style="background-image: url('https://images.pexels.com/photos/3607338/pexels-photo-3607338.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')"></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-treasured-600/40 to-transparent rounded-3xl"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-Prayer:
-Lord, help me to walk by faith and not by sight. Teach me to trust You even when I don’t understand. Strengthen my faith so I may grow in obedience to Your will. In Jesus’ name, Amen.</p>
-	</div>
-	</section>
-    
-    <section id="devotional">
-        <h2>Daily Devotional</h2>
-        <div class="devotional-card">
-		<h3>Boundless Gratitude</h3>
-		<p>"Oh, give thanks to the Lord, for He is good! For His mercy endures forever." — Psalm 107:1 (NKJV)
+  <!-- Features Section -->
+  <section id="features" class="py-16 md:py-24 px-4 md:px-6 lg:px-8 secondary-gradient">
+    <div class="container mx-auto">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+          Nurturing Faith Through Technology
+        </h2>
+        <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+          Treasured LifeMinistry provides a central hub for all your spiritual resources, making it easier to grow in your Christian journey.
+        </p>
+      </div>
 
-Gratitude is not just an occasional response to life's blessings; it is a lifestyle of acknowledging God’s goodness in every season. Psalm 107 reminds us of God’s faithfulness, recounting how He rescues, provides, and restores His people. Each section of the psalm repeats the call: "Oh, that men would give thanks to the Lord for His goodness, and for His wonderful works to the children of men!" (Psalm 107:8, 15, 21, 31). This repetition emphasizes that thanksgiving should be our natural response to God’s love and mercy.
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <!-- Feature 1 -->
+        <div class="bg-white rounded-xl p-6 shadow-md shadow-treasured-100/50 border border-treasured-100 transition-all hover:shadow-lg group feature-card">
+          <div class="w-12 h-12 rounded-full secondary-gradient flex items-center justify-center mb-4 text-treasured-700 group-hover:treasured-gradient group-hover:text-white transition-all">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+          </div>
+          <h3 class="text-xl font-bold text-gray-900 mb-3">Sermons</h3>
+          <p class="text-gray-600">Access and search through sermon archives by topic, scripture, or date to deepen your understanding.</p>
+        </div>
 
-True gratitude is boundless because God’s goodness knows no limits. Even in difficulties, His steadfast love sustains us. When we feel lost, He guides us. When we are weary, He refreshes us. When we are broken, He heals us. Gratitude flows not just from what God gives but from who He is—our Redeemer, Provider, and Sustainer.
+        <!-- Feature 2 -->
+        <div class="bg-white rounded-xl p-6 shadow-md shadow-treasured-100/50 border border-treasured-100 transition-all hover:shadow-lg group feature-card">
+          <div class="w-12 h-12 rounded-full secondary-gradient flex items-center justify-center mb-4 text-treasured-700 group-hover:treasured-gradient group-hover:text-white transition-all">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"/></svg>
+          </div>
+          <h3 class="text-xl font-bold text-gray-900 mb-3">Devotionals</h3>
+          <p class="text-gray-600">Start each day with Christ through our daily devotionals that provide spiritual guidance and reflection.</p>
+        </div>
 
-Today, let us cultivate a heart of boundless gratitude, thanking God not just for the blessings we see but for His constant presence in our lives. No matter where we are or what we face, we can always say, “Give thanks to the Lord, for He is good!”
+        <!-- Feature 3 -->
+        <div class="bg-white rounded-xl p-6 shadow-md shadow-treasured-100/50 border border-treasured-100 transition-all hover:shadow-lg group feature-card">
+          <div class="w-12 h-12 rounded-full secondary-gradient flex items-center justify-center mb-4 text-treasured-700 group-hover:treasured-gradient group-hover:text-white transition-all">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
+          </div>
+          <h3 class="text-xl font-bold text-gray-900 mb-3">Events & Announcements</h3>
+          <p class="text-gray-600">Stay updated on church events, prayer meetings, and important announcements.</p>
+        </div>
 
-Prayer:
-Heavenly Father, thank You for Your endless love and mercy. Help me to cultivate a heart of gratitude in all circumstances, trusting in Your goodness. May my life be a continual offering of praise to You. In Jesus’ name, Amen.</p>
-		<h3>Growth Mindset</h3>
-		<p>Scripture: “Do not conform to the pattern of this world, but be transformed by the renewing of your mind. Then you will be able to test and approve what God’s will is—his good, pleasing and perfect will.” — Romans 12:2 (NIV)
+        <!-- Feature 4 -->
+        <div class="bg-white rounded-xl p-6 shadow-md shadow-treasured-100/50 border border-treasured-100 transition-all hover:shadow-lg group feature-card">
+          <div class="w-12 h-12 rounded-full secondary-gradient flex items-center justify-center mb-4 text-treasured-700 group-hover:treasured-gradient group-hover:text-white transition-all">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          </div>
+          <h3 class="text-xl font-bold text-gray-900 mb-3">Blog Posts</h3>
+          <p class="text-gray-600">Read inspiring articles, testimonies, and spiritual insights written by church leaders.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-In life, challenges and setbacks are inevitable, but how we respond to them makes all the difference. A growth mindset—the belief that abilities and intelligence can be developed through effort and learning—aligns with God’s call for us to grow spiritually, mentally, and emotionally.
+  <!-- About Section -->
+  <section id="about" class="py-16 md:py-24 px-4 md:px-6 lg:px-8">
+    <div class="container mx-auto">
+      <div class="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
+        <div class="w-full lg:w-1/2 aspect-video rounded-3xl overflow-hidden treasured-gradient">
+          <div class="relative w-full h-full">
+            <div class="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-80" style="background-image: url('https://images.pexels.com/photos/3607338/pexels-photo-3607338.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')"></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-treasured-900/50 to-transparent"></div>
+          </div>
+        </div>
 
-The Bible encourages us to renew our minds and not be conformed to worldly limitations. Instead of seeing failures as the end, we should view them as opportunities for growth. The Apostle Paul, despite facing persecution, continued pressing forward, knowing that God's strength was made perfect in his weakness (2 Corinthians 12:9-10).
+        <div class="w-full lg:w-1/2">
+          <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+            Our Mission: A people with passion for God and compassion for men.
+          </h2>
 
-As believers, we are called to learn from our experiences, trust in God's process, and embrace change with faith. When we cultivate a growth mindset, we recognize that God is constantly shaping us into the image of Christ (Philippians 1:6).
+          <p class="text-gray-600 mb-4">
+            Treasured Life Website was created to solve the challenge many churches face: maintaining a centralized online presence for access to sermons, devotionals, and announcements.
+          </p>
 
-Reflection:
-Do you see challenges as obstacles or as opportunities to grow?
+          <p class="text-gray-600 mb-4">
+            Our platform serves as a central hub for Christian teachings and relevant content, with an easy-to-update design that enables pastors and staff to add new materials without needing technical skills.
+          </p>
 
-How can you renew your mind daily in God’s truth?
+          <p class="text-gray-600 mb-4">
+            Whether you're seeking spiritual growth through sermons, daily devotionals, or church event updates, TreasuredLife provides the resources you need for your everyday walk with Jesus.
+          </p>
 
-Prayer:
-Lord, help me to have a mindset that seeks growth in every situation. Renew my mind daily with Your Word, and teach me to trust in Your process. May I embrace challenges with faith, knowing that You are working all things for my good. Amen.</p>
-		<h3>Flourish in Prayer</h3>
-		<p>"The righteous will flourish like a palm tree, they will grow like a cedar of Lebanon." — Psalm 92:12 (NIV)
+          <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+            <div class="bg-white p-4 rounded-lg border border-treasured-100 text-center">
+              <p class="text-3xl font-bold text-treasured-700 mb-1">300+</p>
+              <p class="text-gray-600">Sermons</p>
+            </div>
+            <div class="bg-white p-4 rounded-lg border border-treasured-100 text-center">
+              <p class="text-3xl font-bold text-treasured-700 mb-1">700+</p>
+              <p class="text-gray-600">Devotionals</p>
+            </div>
+            <div class="bg-white p-4 rounded-lg border border-treasured-100 text-center">
+              <p class="text-3xl font-bold text-treasured-700 mb-1">20+</p>
+              <p class="text-gray-600">Churches</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-Prayer is the lifeline of a thriving spiritual life. Just as a tree flourishes when deeply rooted in rich soil and nourished by water, our souls flourish when we stay connected to God through prayer. It is in the quiet moments of conversation with Him that we gain strength, wisdom, and peace.
+  <!-- Call to Action Section -->
+  <section class="py-16 md:py-24 px-4 md:px-6 lg:px-8">
+    <div class="container mx-auto">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-20">
+        <!-- For Visitors -->
+        <div class="bg-white rounded-2xl p-8 md:p-10 shadow-xl shadow-treasured-100/30 border border-treasured-50 cta-card">
+          <div class="cta-card-content">
+            <div class="w-14 h-14 rounded-full treasured-gradient flex items-center justify-center mb-6 text-white">
+              <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            </div>
 
-When we pray consistently, we align ourselves with God’s will and experience His transformative power. Our faith deepens, our hearts find rest, and our spirits are renewed. The Apostle Paul reminds us, “Pray without ceasing” (1 Thessalonians 5:17), encouraging us to make prayer a continuous part of our daily lives.
+            <h3 class="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
+              For Church Members
+            </h3>
 
-A flourishing prayer life is not about eloquent words but a heart surrendered to God. Whether in joy or struggle, may we draw near to Him, trusting that as we do, He will cause us to flourish in His presence.
+            <p class="text-gray-600 mb-8">
+              Access sermons, devotionals, and church announcements all in one place. Strengthen your daily walk with Christ through our curated spiritual resources.
+            </p>
 
-Prayer:
-Lord, help me to grow in my prayer life. Let my heart be rooted in You, drawing strength, wisdom, and peace from Your presence. Teach me to pray without ceasing, knowing that in You, I will flourish. In Jesus' name, Amen.</p>
-		<h3>Whispers in the Wilderness</h3>
-		<p>"Then a great and powerful wind tore through the mountains before the Lord, but the Lord was not in the wind. After the wind, there was an earthquake, but the Lord was not in the earthquake. After the earthquake, a fire, but the Lord was not in the fire. And after the fire came a gentle whisper."
-—1 Kings 19:11-12 (NIV)
+            <ul class="space-y-3 mb-8">
+              <li class="flex items-start gap-3">
+                <div class="w-5 h-5 rounded-full treasured-gradient flex-shrink-0 flex items-center justify-center mt-1">
+                  <div class="w-2 h-2 bg-white rounded-full"></div>
+                </div>
+                <span class="text-gray-700">Watch & listen to sermons anytime</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <div class="w-5 h-5 rounded-full treasured-gradient flex-shrink-0 flex items-center justify-center mt-1">
+                  <div class="w-2 h-2 bg-white rounded-full"></div>
+                </div>
+                <span class="text-gray-700">Daily devotionals for spiritual growth</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <div class="w-5 h-5 rounded-full treasured-gradient flex-shrink-0 flex items-center justify-center mt-1">
+                  <div class="w-2 h-2 bg-white rounded-full"></div>
+                </div>
+                <span class="text-gray-700">Get notifications for church events</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <div class="w-5 h-5 rounded-full treasured-gradient flex-shrink-0 flex items-center justify-center mt-1">
+                  <div class="w-2 h-2 bg-white rounded-full"></div>
+                </div>
+                <span class="text-gray-700">Access blog posts and articles</span>
+              </li>
+            </ul>
+          </div>
 
-Elijah was weary, afraid, and alone. He had just experienced a great victory on Mount Carmel, yet now he found himself in the wilderness, hiding in a cave, uncertain of what was next. He expected to find God in the mighty wind, the earthquake, or the fire—but instead, God came in a gentle whisper.
+          <a href="/register" class="inline-flex items-center justify-center treasured-gradient text-white w-full py-6 h-auto rounded-md">
+            Create Free Account
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ml-2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </a>
+        </div>
 
-Often, we seek God in grand moments—miracles, signs, or wonders. But He frequently speaks to us in the quiet places, in the stillness of our hearts. The wilderness may seem like a place of isolation and despair, but it is also a place of divine encounter. It is where distractions fade, and God’s voice becomes clearer.
+        <!-- For Administrators -->
+        <div class="bg-gray-900 rounded-2xl p-8 md:p-10 shadow-xl shadow-gray-900/20 text-white cta-card">
+          <div class="cta-card-content">
+            <div class="w-14 h-14 rounded-full bg-white/10 flex items-center justify-center mb-6 text-white">
+              <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 7c0-4-4.56-6-8.4-6C.94 1 1 3 1 3c0 4 3.56 6 7.4 6 3.7 0 2.6 1 2.6 1"/><path d="M18 7c-2 2-6 3-9 3"/><path d="m19 16 2 2 4-4"/><path d="M7.8 16H5a2 2 0 0 0-2 2v4h7.1"/><path d="M11 16c-.5-1.5.5-2 2-2h1.5"/><circle cx="16" cy="19" r="2"/><path d="M22 19h-3"/></svg>
+            </div>
 
-Are you in a wilderness season? Do not fear the silence. Lean in, listen closely, and you will hear His whisper—words of love, guidance, and reassurance. Even in your solitude, God is near.
+            <h3 class="text-2xl md:text-3xl font-bold mb-4">
+              For Church Administrators
+            </h3>
 
-Prayer:
-Lord, help me to silence the noise around me and within me so that I may hear Your voice. In my wilderness moments, remind me that You are near, speaking in the stillness. Give me the faith to trust in Your whispers. Amen.</p>
-		<h3>Baby Steps</h3>
-		<p>"Do not despise these small beginnings, for the Lord rejoices to see the work begin."
-— Zechariah 4:10 (NLT)
+            <p class="text-gray-300 mb-8">
+              Easily manage and publish content for your congregation. No technical skills required. Update sermons, post devotionals, and share announcements easily.
+            </p>
 
-Taking baby steps can sometimes feel slow and insignificant, but in God's eyes, each step of faith matters. Just as a baby learns to walk by first stumbling, then standing, and finally taking small, wobbly steps, our spiritual journey also begins with small acts of obedience and trust.
+            <ul class="space-y-3 mb-8">
+              <li class="flex items-start gap-3">
+                <div class="w-5 h-5 rounded-full bg-white/20 flex-shrink-0 flex items-center justify-center mt-1">
+                  <div class="w-2 h-2 bg-white rounded-full"></div>
+                </div>
+                <span class="text-gray-300">Upload sermons with one click</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <div class="w-5 h-5 rounded-full bg-white/20 flex-shrink-0 flex items-center justify-center mt-1">
+                  <div class="w-2 h-2 bg-white rounded-full"></div>
+                </div>
+                <span class="text-gray-300">Publish daily devotionals</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <div class="w-5 h-5 rounded-full bg-white/20 flex-shrink-0 flex items-center justify-center mt-1">
+                  <div class="w-2 h-2 bg-white rounded-full"></div>
+                </div>
+                <span class="text-gray-300">Manage church events calendar</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <div class="w-5 h-5 rounded-full bg-white/20 flex-shrink-0 flex items-center justify-center mt-1">
+                  <div class="w-2 h-2 bg-white rounded-full"></div>
+                </div>
+                <span class="text-gray-300">Create engaging blog content</span>
+              </li>
+            </ul>
+          </div>
 
-We may long for immediate progress or big breakthroughs, but God delights in our small beginnings. He knows that growth takes time and that every little step forward brings us closer to His purpose. When we take small steps—praying a little more, trusting Him a little deeper, reading His Word a little longer—we build the foundation for a stronger walk with Him.
+          <a href="/login" class="inline-flex items-center justify-center bg-white hover:bg-gray-100 text-gray-900 w-full py-6 h-auto rounded-md">
+            Admin Login
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ml-2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
 
-If you feel like your progress is slow, remember that every great journey starts with one small step. Keep moving forward in faith, and trust that God is guiding your every step.
+  <!-- Footer -->
+  <footer id="contact" class="bg-gray-50 pt-16 pb-8 px-4 md:px-6 lg:px-8">
+    <div class="container mx-auto">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
+        <!-- About -->
+        <div>
+          <div class="flex items-center gap-2 mb-4">
+            <div class="w-10 h-10 rounded-full treasured-gradient flex items-center justify-center">
+              <span class="text-white font-bold text-xl">TL</span>
+            </div>
+            <h1 class="text-xl font-bold text-gray-900">TreasuredLife</h1>
+          </div>
+          <p class="text-gray-600 mb-4">
+            A central hub for Christian teachings and relevant content, making spiritual growth accessible to all.
+          </p>
+        </div>
 
-Prayer:
-Heavenly Father, help me to trust You even in the small beginnings. Give me the patience to take baby steps in my faith and the courage to keep moving forward. I know that You are leading me, step by step, into the plans You have for me. Amen.</p>
-		<h3>Anxious for Nothing</h3>
-		<p>“Do not be anxious about anything, but in everything by prayer and supplication with thanksgiving let your requests be made known to God. And the peace of God, which surpasses all understanding, will guard your hearts and your minds in Christ Jesus.” — Philippians 4:6-7 (ESV)
+        <!-- Quick Links -->
+        <div class="flex flex-col">
+          <h4 class="font-bold text-gray-900 mb-4">Quick Links</h4>
+          <div class="space-y-2">
+            <a href="#features" class="block text-gray-600 hover:text-treasured-600 transition-colors py-1">Features</a>
+            <a href="#about" class="block text-gray-600 hover:text-treasured-600 transition-colors py-1">About Us</a>
+            <a href="#contact" class="block text-gray-600 hover:text-treasured-600 transition-colors py-1">Contact</a>
+            <a href="/login" class="block text-gray-600 hover:text-treasured-600 transition-colors py-1">Admin Login</a>
+          </div>
+        </div>
 
-Anxiety often creeps into our hearts when we feel overwhelmed by life’s uncertainties. Whether it’s financial struggles, health concerns, or the pressures of daily living, the weight of worry can feel unbearable. But in Philippians 4:6-7, Paul reminds us that we don’t have to carry this burden alone.
+        <!-- Resources -->
+        <div class="flex flex-col">
+          <h4 class="font-bold text-gray-900 mb-4">Resources</h4>
+          <div class="space-y-2">
+            <a href="/sermons" class="block text-gray-600 hover:text-treasured-600 transition-colors py-1">Sermons</a>
+            <a href="/devotionals" class="block text-gray-600 hover:text-treasured-600 transition-colors py-1">Daily Devotionals</a>
+            <a href="/events" class="block text-gray-600 hover:text-treasured-600 transition-colors py-1">Events</a>
+            <a href="/blog" class="block text-gray-600 hover:text-treasured-600 transition-colors py-1">Blog</a>
+          </div>
+        </div>
 
-God invites us to bring everything to Him in prayer. Instead of letting fear control us, we can surrender our worries to the One who holds the universe in His hands. When we choose to pray instead of panic, and trust instead of tremble, God’s peace—a peace that goes beyond human understanding—will guard our hearts and minds.
+        <!-- Contact Us -->
+        <div class="flex flex-col">
+          <h4 class="font-bold text-gray-900 mb-4">Contact Us</h4>
+          <div class="space-y-2">
+            <p class="text-gray-600">Shepherd Kings PLaza, Beside Police Signboard, FHA Lugbe</p>
+            <p class="text-gray-600">Abuja, Nigeria</p>
+            <p class="text-gray-600">treasuredlifeministry@gmail.com</p>
+            <p class="text-gray-600">+234 803 352 4959</p>
+          </div>
+        </div>
+      </div>
 
-Are you feeling anxious today? Take a moment to pause, pray, and thank God for His faithfulness. As you shift your focus from your worries to His promises, you will experience the unshakable peace that only He can give.
+      <!-- Footer Bottom -->
+      <div class="border-t border-gray-200 pt-8 text-center text-gray-600 text-sm">
+        <p>&copy; <span id="year"></span> Treasured Life Ministry. All rights reserved.</p>
+        <p class="mt-1">
+          <a href="#" class="hover:text-treasured-600 transition-colors">Privacy Policy</a> •
+          <a href="#" class="hover:text-treasured-600 transition-colors ml-2">Terms of Service</a>
+        </p>
+      </div>
+    </div>
+  </footer>
 
-Prayer:
-Heavenly Father, I surrender my worries to You. Help me to trust in Your perfect plan and rest in Your peace. Thank You for being my refuge and strength. In Jesus’ name, Amen.</p>
-	</div>
-    </section>
-    
-    <section id="events">
-        <h2>Announcements & Events</h2>
-        <div class="announcement">
-	<p><strong>Sunday Celebration Service:</strong> Join us at 9 AM for our weekly service.</p>
-	<p><strong>Tuesday Night of Help:</strong> Join us at 5:30 PM weekly.</p>
-	<p><strong>Easter Celebration Service:</strong> 19th April, 2025.</p>
-	<p><strong>Teens Camp Meeting:</strong> 26th April, 2025.</p>
-	</div>
-    </section>
-    
-    <section id="contact">
-        <h2>Address<h2>
-	<div class="address">
-		<p><strong>Shepherd Kings Plaza:</strong> Beside Remaco Filling Station, Police Signboard, Lugbe Abuja, Nigeria.</p>
-		<p><strong>Follow our Social Media Handles.</p>
-	<h2>Contact Us</h2>
-	<div class="contact">
-        <form>
-            <input type="text" placeholder="Your Name" required>
-            <input type="email" placeholder="Your Email" required>
-            <textarea placeholder="Your Message" required></textarea>
-            <button type="submit">Send</button>
-        </form>
-    </section>
-    
-    <section class="admin">
-	<h2>Admin Dashboard</h2>
-	<button>Add Sermon</button>
-	<button>Add Devotional</button>
-	<button>Add Announcement</button>
-    </section>
+  <script>
+    // Set current year in footer
+    document.getElementById('year').textContent = new Date().getFullYear();
 
+    // Mobile menu toggle
+    const menuButton = document.getElementById('menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    let isMenuOpen = false;
+
+    menuButton.addEventListener('click', () => {
+      isMenuOpen = !isMenuOpen;
+      if (isMenuOpen) {
+        mobileMenu.classList.remove('hidden');
+        menuButton.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg>';
+      } else {
+        mobileMenu.classList.add('hidden');
+        menuButton.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>';
+      }
+    });
+
+    // Close mobile menu when clicking on links
+    const mobileLinks = mobileMenu.querySelectorAll('a');
+    mobileLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.add('hidden');
+        isMenuOpen = false;
+        menuButton.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>';
+      });
+    });
+
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+
+        const targetId = this.getAttribute('href');
+        if (targetId === '#') return;
+
+        const targetElement = document.querySelector(targetId);
+        if (targetElement) {
+          window.scrollTo({
+            top: targetElement.offsetTop - 80, // Adjust for header height
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+  </script>
 </body>
 </html>
+
