@@ -4,74 +4,152 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Treasured Life Website</title>
-    <link rel="stylesheet" href="styles.css">
-    <script defer src="script.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+            color: #333;
+        }
+        nav {
+            background-color: teal;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+        }
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 15px;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+        }
+        section {
+            padding: 40px;
+            text-align: center;
+        }
+        .sermons-container, .devotional-container, .events-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .card {
+            background: white;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            width: 300px;
+            border-radius: 8px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            max-width: 400px;
+            margin: auto;
+        }
+        input, textarea, button {
+            margin: 10px 0;
+            padding: 10px;
+        }
+        button {
+            background-color: teal;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            loadContent();
+        });
+        
+        function loadContent() {
+            const sermonsContainer = document.querySelector(".sermons-container");
+            const devotionalContainer = document.querySelector(".devotional-container");
+            const eventsContainer = document.querySelector(".events-container");
+            
+            const sampleContent = [
+                { title: "Sunday Message", description: "The Knowlegde of God." },
+                { title: "Daily Devotion", description: "Awaken the Sleeping Giant." },
+                { title: "Upcoming Event", description: "Sunday Celebration Service: Every Sunday by 9 AM." }
+            ];
+            
+            sampleContent.forEach(item => {
+                const card = document.createElement("div");
+                card.className = "card";
+                card.innerHTML = `<h3>${item.title}</h3><p>${item.description}</p>`;
+                if (item.title.includes("Sermon")) {
+                    sermonsContainer.appendChild(card);
+                } else if (item.title.includes("Devotion")) {
+                    devotionalContainer.appendChild(card);
+                } else {
+                    eventsContainer.appendChild(card);
+                }
+            });
+        }
+        
+        function addContent() {
+            const adminPanel = document.getElementById("content-management");
+            const newItem = document.createElement("div");
+            newItem.className = "card";
+            newItem.innerHTML = `<h3>New Content</h3><p>Editable content.</p>`;
+            adminPanel.appendChild(newItem);
+        }
+    </script>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="navbar">
+    <nav>
         <div class="logo">Treasured Life Ministry</div>
         <ul>
-            <li><a href="#welcome">Home</a></li>
+            <li><a href="#welcome">Welcome</a></li>
             <li><a href="#sermons">Sermons</a></li>
-            <li><a href="#devotional">Devotionals</a></li>
+            <li><a href="#devotional">Devotional</a></li>
             <li><a href="#events">Events</a></li>
             <li><a href="#contact">Contact</a></li>
-            <li><a href="admin.html">Admin</a></li>
+            <li><a href="#admin">Admin</a></li>
         </ul>
     </nav>
-
-    <!-- Welcome Section -->
-    <section id="welcome" class="welcome">
+    
+    <section id="welcome">
         <h1>Welcome to Our Church</h1>
         <p>We are a people with passion for God and compassion for men.</p>
     </section>
-
-    <!-- Sermons Section -->
-    <section id="sermons" class="sermons">
+    
+    <section id="sermons">
         <h2>Latest Sermons</h2>
-	<h3>The Knowlegde of God</h3>
-	<h3>Gratitude Our Weapon</h3>
-	<h3>Learning by Faith</h3>
-	<h3>It is Written</h3>
-	<h3>Intentional Parenting</h3>
-	<h3>Trust Living</h3>
-        <audio controls>
-            <source src="sermon.mp3" type="audio/mp3">
-            Your browser does not support the audio element.
-        </audio>
+        <div class="Gratitude our Weapon."></div>
+	<div class="Learning by Faith."></div>
+	<div class="It is Written."></div>
+	<div class="Intentional Parenting."></div>
+	<div class="Trust Living."></div>
     </section>
-
-    <!-- Devotional Section -->
-    <section id="devotional" class="devotional">
-        <h2>Devotionals</h2>
-        <div class="devotional-card">
-            <h3>Daily Blessings</h3>
-	    <h4>Awaken the sleeping giant</h4>
-	    <h4>Boundless Gratitude</h4>
-	    <h4>Growth Mindset</h4>
-	    <h4>Flourish in Prayer</h4>
-	    <h4>Whispers in the Wilderness</h4>
-	    <h4>Baby Steps</h4>
-	    <h4>Anxious for Nothing</h4>
-            <p>Find inspiration and strength in our daily devotionals.</p>
-        </div>
+    
+    <section id="devotional">
+        <h2>Daily Devotional</h2>
+        <div class="Boundless Gratitude."></div>
+	<div class="Growth Mindset."></div>
+	<div class="Flourish in Prayer."></div>
+	<div class="Whispers in the Wilderness."></div>
+	<div class="Baby Steps."></div>
+	<div class="Anxious for Nothing."></div>
     </section>
-
-    <!-- Announcements & Events Section -->
-    <section id="events" class="events">
-        <h2>Upcoming Events</h2>
-        <ul>
-            <li><strong>Sunday Service:</strong> Every Sunday at 9 AM</li>
-            <li><strong>Bible Study:</strong> Tuesdays at 5:30 PM</li>
-	    <li><strong>Church Unusual Service:</strong> Saturdays at 6 PM</li>
-        </ul>
+    
+    <section id="events">
+        <h2>Announcements & Events</h2>
+        <div class="Sunday Celebration Service: Every Sunday by 9 AM."></div>
+	<div class="Night of Help: Every Tuesday by 5:30 PM."></div>
+	<div class="Church Unusual Service: Every Saturday by 6 PM."></div>
+	<div class="Easter Celebration Service 19th April, 2025"></div>
+	<div class="Teens Camp Meeting 26th April, 2025"></div>
     </section>
-
-    <!-- Contact Form -->
-    <section id="contact" class="contact">
+    
+    <section id="contact">
         <h2>Contact Us</h2>
-	<h4>Shepherd Kings Plaza, beside Remaco Filling Station, Police Signboard, Lugbe Abuja, Nigeria</h4>
         <form>
             <input type="text" placeholder="Your Name" required>
             <input type="email" placeholder="Your Email" required>
@@ -79,12 +157,13 @@
             <button type="submit">Send</button>
         </form>
     </section>
-
-    <iframe width="560" height="315" src="https://www.youtube.com/embed/https://youtu.be/H0-WkpmTPrM?si=n07118xVT_XQZ9R2"
-    title="Church Intro Video" frameborder="0" allowfullscreen>
-</iframe>
-
-
+    
+    <section id="admin">
+        <h2>Admin Dashboard</h2>
+        <div class="admin-panel">
+            <button onclick="addContent()">Add Content</button>
+            <div id="content-management"></div>
+        </div>
+    </section>
 </body>
 </html>
-
