@@ -1,5 +1,29 @@
 {
   "dependencies": {
-    "firebase": "^11.5.0"
-  }
+    "ejs": "^3.1.10",
+    "express": "^5.1.0",
+    "firebase": "^11.5.0",
+    "nodemon": "^3.1.9"
+  },
+  "name": "portfolio",
+  "version": "1.0.0",
+  "description": "## 🏆 Project Overview This project is a **church website** that provides users access to **sermons, devotionals, announcements, and contact information**. The platform also includes an **admin dashboard** for managing content.",
+  "main": "script.js",
+  "scripts": {
+    "dev": "nodemon server",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mareeam89/Portfolio.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Mareeam89/Portfolio/issues"
+  },
+  "homepage": "https://github.com/Mareeam89/Portfolio#readme"
 }
