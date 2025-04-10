@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TreasuredLife - Devotionals</title>
+  <style>
+    /* Base Styles */
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap');
+    
+    :root {
+      --treasured-100: #e5deff;
+      --treasured-200: #d6c7ff;
+      --treasured-300: #b69fff;
+      --treasured-400: #9b87f5;
+      --treasured-600: #7e69ab;
+      --treasured-700: #6E59A5;
+      --treasured-800: #5f4c92;
+      --treasured-900: #3d3258;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+    }
+    
+    html {
+      scroll-behavior: smooth;
+    }
+    
+    body {
+      background-color: #fafafa;
+      color: #333;
+      line-height: 1.5;
+    }
+    
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Playfair Display', serif;
+    }
+    
+    /* Utility Classes */
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+    
+    .treasured-gradient {
+      background: linear-gradient(to right, var(--treasured-600), var(--treasured-800));
+    }
+    
+    .secondary-gradient {
+      background: linear-gradient(to right, var(--treasured-100), var(--treasured-200));
+    }
+    
+    /* Header & Navigation */
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 50;
+      background-color: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid #f0f0f0;
+      padding: 1rem 0;
+    }
+    
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .logo-circle {
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .logo-circle span {
+      color: white;
+      font-weight: 700;
+      font-size: 1.25rem;
+    }
+    
+    .logo h1 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #333;
+    }
+    
+    .desktop-menu {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+    
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+      color: #444;
+    }
+    
+    .nav-links a {
+      color: #444;
+      text-decoration: none;
+      transition: color 0.3s;
+      padding: 0.5rem 0;
+    }
+    
+    .nav-links a:hover {
+      color: var(--treasured-700);
+    }
+    
+    .nav-buttons {
+      display: flex;
+      gap: 0.75rem;
+    }
+    
+    .btn {
+      font-weight: 500;
+      padding: 0.5rem 1rem;
+      border-radius: 0.375rem;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s;
+    }
+    
+    .btn-ghost {
+      background: transparent;
+      color: #444;
+    }
+    
+    .btn-ghost:hover {
+      background: rgba(0,0,0,0.05);
+    }
+    
+    .btn-primary {
+      background: linear-gradient(to right, var(--treasured-600), var(--treasured-800));
+      color: white;
+    }
+    
+    .btn-primary:hover {
+      opacity: 0.9;
+    }
+    
+    .btn-outline {
+      border: 1px solid var(--treasured-300);
+      color: var(--treasured-700);
+      background: transparent;
+    }
+    
+    .btn-outline:hover {
+      background: rgba(182, 159, 255, 0.1);
+    }
+    
+    .mobile-menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      color: #444;
+      cursor: pointer;
+      font-size: 1.5rem;
+    }
+    
+    .mobile-menu {
+      display: none;
+      padding: 1rem 0;
+    }
+    
+    .mobile-menu .nav-links {
+      flex-direction: column;
+    }
+    
+    .mobile-menu .nav-buttons {
+      flex-direction: column;
+      margin-top: 1rem;
+    }
+    
+    /* Devotionals Page */
+    .devotionals-hero {
+      padding-top: 8rem;
+      padding-bottom: 3rem;
+      text-align: center;
+    }
+    
+    .devotionals-hero h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1.5rem;
+      color: #222;
+    }
+    
+    .devotionals-hero p {
+      color: #666;
+      font-size: 1.125rem;
+      max-width: 36rem;
+      margin: 0 auto;
+    }
+    
+    .devotionals-grid {
+      display: grid;
+      grid-template-columns: repeat(1, 1fr);
+      gap: 2rem;
+      padding-bottom: 4rem;
+    }
+    
+    /* Cards */
+    .card {
+      border-radius: 0.5rem;
+      overflow: hidden;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      background-color: white;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+    }
+    
+    .card-image {
+      width: 100%;
+      height: 13rem;
+      overflow: hidden;
+    }
+    
+    .card-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    .card-header {
+      padding: 1.5rem 1.5rem 0.5rem;
+    }
+    
+    .card-title {
+      font-size: 1.25rem;
+      color: #222;
+    }
+    
+    .card-content {
+      padding: 0 1.5rem 1.5rem;
+    }
+    
+    .card-excerpt {
+      color: #666;
+      margin-bottom: 1rem;
+    }
+    
+    .card-meta {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      color: #777;
+      font-size: 0.875rem;
+      margin-bottom: 1rem;
+    }
+    
+    .meta-item {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+    
+    .card-footer {
+      padding: 0 1.5rem 1.5rem;
+    }
+    
+    /* Devotional Detail */
+    .devotional-hero {
+      position: relative;
+      height: 24rem;
+    }
+    
+    .devotional-hero-image {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    .devotional-hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, transparent, rgba(0,0,0,0.7));
+    }
+    
+    .devotional-hero-content {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 1.5rem;
+      color: white;
+    }
+    
+    .devotional-back-link {
+      display: inline-flex;
+      align-items: center;
+      color: white;
+      margin-bottom: 1rem;
+      text-decoration: none;
+    }
+    
+    .devotional-back-link:hover {
+      text-decoration: underline;
+    }
+    
+    .devotional-title {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+    
+    .devotional-meta {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      font-size: 0.875rem;
+      opacity: 0.8;
+    }
+    
+    .devotional-content {
+      padding: 2.5rem 1rem;
+    }
+    
+    .devotional-content-inner {
+      max-width: 48rem;
+      margin: 0 auto;
+    }
+    
+    .devotional-scripture {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: 1.5rem;
+      margin-bottom: 1.5rem;
+      border-bottom: 1px solid #eee;
+    }
+    
+    .devotional-scripture-text {
+      color: #666;
+      font-size: 0.875rem;
+      font-weight: 500;
+    }
+    
+    .devotional-save-btn {
+      background: transparent;
+      border: none;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: #666;
+      cursor: pointer;
+      font-size: 0.875rem;
+    }
+    
+    .devotional-save-btn:hover {
+      color: var(--treasured-700);
+    }
+    
+    .devotional-text {
+      color: #444;
+    }
+    
+    .devotional-text p {
+      margin-bottom: 1rem;
+    }
+    
+    .devotional-text h3 {
+      font-size: 1.5rem;
+      margin: 1.5rem 0 0.5rem;
+      color: #222;
+    }
+    
+    .devotional-text ol, .devotional-text ul {
+      margin: 1.5rem 0;
+      padding-left: 1.5rem;
+    }
+    
+    .devotional-text li {
+      margin-bottom: 0.5rem;
+    }
+    
+    .devotional-text blockquote {
+      border-left: 4px solid var(--treasured-300);
+      padding-left: 1rem;
+      margin: 1.5rem 0;
+      font-style: italic;
+      color: #555;
+    }
+    
+    .devotional-footer {
+      margin-top: 2.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid #eee;
+    }
+    
+    .devotional-footer-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    /* Footer */
+    .footer {
+      background-color: #f5f5f5;
+      padding: 4rem 1rem 2rem;
+    }
+    
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(1, 1fr);
+      gap: 2.5rem;
+      margin-bottom: 3rem;
+    }
+    
+    .footer-section h4 {
+      font-weight: bold;
+      color: #222;
+      margin-bottom: 1rem;
+    }
+    
+    .footer-links {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    
+    .footer-link {
+      color: #666;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    
+    .footer-link:hover {
+      color: var(--treasured-600);
+    }
+    
+    .footer-bottom {
+      border-top: 1px solid #e0e0e0;
+      padding-top: 2rem;
+      text-align: center;
+      color: #666;
+      font-size: 0.875rem;
+    }
+    
+    .footer-bottom-links {
+      margin-top: 0.25rem;
+    }
+    
+    .footer-bottom-link {
+      color: #666;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    
+    .footer-bottom-link:hover {
+      color: var(--treasured-600);
+    }
+    
+    /* Responsive */
+    @media (min-width: 640px) {
+      .devotionals-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    
+    @media (min-width: 768px) {
+      .devotionals-hero h1 {
+        font-size: 3rem;
+      }
+      
+      .devotional-title {
+        font-size: 2.5rem;
+      }
+      
+      .devotional-hero {
+        height: 28rem;
+      }
+      
+      .devotional-hero-content {
+        padding: 2.5rem;
+      }
+      
+      .devotional-content {
+        padding: 2.5rem;
+      }
+    }
+    
+    @media (min-width: 1024px) {
+      .devotionals-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+      
+      .footer-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+      
+      .devotional-hero {
+        height: 32rem;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .desktop-menu {
+        display: none;
+      }
+      
+      .mobile-menu-btn {
+        display: block;
+      }
+      
+      .mobile-menu.active {
+        display: block;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="container">
+      <nav class="nav">
+        <div class="logo">
+          <div class="logo-circle treasured-gradient">
+            <span>TL</span>
+          </div>
+          <a style="text-decoration: none;" href="index.html">
+            <h1>TreasuredLife</h1>
+          </a>
+        </div>
+        
+        <div class="desktop-menu">
+          <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="devotional.html" class="active">Devotionals</a>
+            <a href="contact.html">Contact</a>
+          </div>
+          <div class="nav-buttons">
+            <a href="/login" class="btn btn-ghost">Log In</a>
+            <a href="/register" class="btn btn-primary">Get Started</a>
+          </div>
+        </div>
+        
+        <button class="mobile-menu-btn" id="mobile-menu-toggle">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+        </button>
+      </nav>
+      
+      <div class="mobile-menu" id="mobile-menu">
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="devotional.html" class="active"></a>>Devotionals</a>
+            <a href="contact,html">Contact</a>
+        </div>
+        <div class="nav-buttons">
+          <a href="/login" class="btn btn-ghost">Log In</a>
+          <a href="/register" class="btn btn-primary">Get Started</a>
+        </div>
+      </div>
+    </div>
+  </header>
+  
+  <main id="app">
+    <!-- The main content will be dynamically loaded here -->
+  </main>
+  
+  <footer class="footer" id="contact">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-section">
+          <div class="logo">
+            <div class="logo-circle treasured-gradient">
+              <span>TL</span>
+            </div>
+            <h1>TreasuredLife</h1>
+          </div>
+          <p class="mt-4 text-gray-600">
+            A central hub for Christian teachings and relevant content, making spiritual growth accessible to all.
+          </p>
+        </div>
+        
+        <div class="footer-section">
+          <h4>Quick Links</h4>
+          <div class="footer-links">
+            <a href="#features" class="footer-link">Features</a>
+            <a href="#about" class="footer-link">About Us</a>
+            <a href="#contact" class="footer-link">Contact</a>
+            <a href="/login" class="footer-link">Admin Login</a>
+          </div>
+        </div>
+        
+        <div class="footer-section">
+          <h4>Resources</h4>
+          <div class="footer-links">
+            <a href="/sermons" class="footer-link">Sermons</a>
+            <a href="devotional.html" class="footer-link">Daily Devotionals</a>
+            <a href="/events" class="footer-link">Events</a>
+            <a href="/blog" class="footer-link">Blog</a>
+          </div>
+        </div>
+        
+        <div class="footer-section">
+          <h4>Contact Us</h4>
+          <p>No 2, Ademola Adetokumbo</p>
+          <p>Abuja, Nigeria</p>
+          <p>contact@treasuredlife.com</p>
+          <p>+234 803 352 4959</p>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <p>&copy; <span id="current-year">2025</span> TreasuredLife. All rights reserved.</p>
+        <p class="footer-bottom-links">
+          <a href="#" class="footer-bottom-link">Privacy Policy</a> • 
+          <a href="#" class="footer-bottom-link">Terms of Service</a>
+        </p>
+      </div>
+    </div>
+  </footer>
+  
+  <script>
+    // Devotional data
+    const devotionals = [
+      {
+        id: "1",
+        title: "Walking in Faith Daily",
+        excerpt: "Exploring how daily faith practices transform our relationship with God and others around us.",
+        date: "April 8, 2025",
+        readTime: "5 min read",
+        image: "https://images.unsplash.com/photo-1499209974431-9dddcece7f88?auto=format&fit=crop&q=80&w=2500",
+        content: `
+          <p class="mb-4">In Hebrews 11:1, we read: "Now faith is the assurance of things hoped for, the conviction of things not seen." This powerful verse reminds us that faith is not just a feeling but a confident assurance in God's promises.</p>
+          
+          <p class="mb-4">Walking in faith daily means trusting God even when the path ahead is unclear. It's about taking steps forward, guided by His word rather than by sight. When we choose faith over fear, we align ourselves with God's purpose for our lives.</p>
+          
+          <h3 class="text-xl font-bold mb-2 mt-6">Practical Steps for Daily Faith</h3>
+          
+          <ol class="list-decimal pl-6 mb-6 space-y-2">
+            <li>Begin each day in prayer, surrendering your plans to God</li>
+            <li>Meditate on scripture that strengthens your faith</li>
+            <li>Remember past instances of God's faithfulness</li>
+            <li>Connect with other believers who encourage your spiritual journey</li>
+          </ol>
+          
+          <p class="mb-4">2 Corinthians 5:7 tells us, "For we walk by faith, not by sight." When circumstances seem difficult, this is precisely when our faith grows strongest. Each challenge becomes an opportunity to trust God more deeply.</p>
+          
+          <blockquote class="border-l-4 border-treasured-300 pl-4 italic my-6">
+            "Faith is taking the first step even when you don't see the whole staircase." - Martin Luther King Jr.
+          </blockquote>
+          
+          <p>As you go through today, look for moments to exercise your faith. Whether in small decisions or major life changes, let faith be your guide. Remember that God is faithful, and His promises never fail.</p>
+        `,
+        scripture: "Hebrews 11:1, 2 Corinthians 5:7"
+      },
+      {
+        id: "2",
+        title: "The Power of Prayer",
+        excerpt: "Discover how consistent prayer can strengthen your spiritual journey and bring peace to your daily life.",
+        date: "April 7, 2025",
+        readTime: "7 min read",
+        image: "https://images.unsplash.com/photo-1492176273113-2d51f47b23b0?auto=format&fit=crop&q=80&w=2500",
+        content: `
+          <p class="mb-4">Prayer is one of the most powerful tools available to believers. In Matthew 21:22, Jesus teaches us, "And whatever you ask in prayer, you will receive, if you have faith."</p>
+          
+          <p class="mb-4">Yet many of us struggle to maintain a consistent prayer life. We may wonder if our prayers are being heard or if they truly make a difference. The scriptures assure us that prayer is not just ritualistic communication but a transformative practice that changes both our circumstances and ourselves.</p>
+          
+          <h3 class="text-xl font-bold mb-2 mt-6">Elements of Effective Prayer</h3>
+          
+          <ul class="list-disc pl-6 mb-6 space-y-2">
+            <li>Sincerity - Approaching God with honest hearts</li>
+            <li>Faith - Believing God hears and responds</li>
+            <li>Persistence - Continuing to pray without losing heart</li>
+            <li>Alignment - Praying according to God's will</li>
+          </ul>
+          
+          <p class="mb-4">In 1 Thessalonians 5:17, Paul encourages believers to "pray without ceasing." This doesn't mean we must be on our knees 24 hours a day, but rather that we maintain an attitude of prayer throughout our daily activities.</p>
+          
+          <blockquote class="border-l-4 border-treasured-300 pl-4 italic my-6">
+            "Prayer does not change God, but it changes him who prays." - Søren Kierkegaard
+          </blockquote>
+          
+          <p>Today, consider setting aside specific times for prayer. Even brief moments throughout your day can help you maintain that vital connection with God. Remember that no concern is too small and no challenge too great to bring before Him.</p>
+        `,
+        scripture: "Matthew 21:22, 1 Thessalonians 5:17"
+      },
+      {
+        id: "3",
+        title: "Finding Rest in Scripture",
+        excerpt: "How the words of scripture provide comfort and rest for the weary soul in times of trouble.",
+        date: "April 6, 2025",
+        readTime: "6 min read",
+        image: "https://images.unsplash.com/photo-1476234251651-f353703a034d?auto=format&fit=crop&q=80&w=2500",
+        content: `
+          <p class="mb-4">In our fast-paced world, true rest often feels elusive. Yet Matthew 11:28-30 offers a beautiful invitation: "Come to me, all who labor and are heavy laden, and I will give you rest. Take my yoke upon you, and learn from me, for I am gentle and lowly in heart, and you will find rest for your souls. For my yoke is easy, and my burden is light."</p>
+          
+          <p class="mb-4">Scripture provides a unique form of rest—not merely physical relaxation, but a deep soul rest that comes from aligning our lives with God's truth. When we immerse ourselves in God's Word, we find peace that transcends our circumstances.</p>
+          
+          <h3 class="text-xl font-bold mb-2 mt-6">How Scripture Offers Rest</h3>
+          
+          <ul class="list-disc pl-6 mb-6 space-y-2">
+            <li>It shifts our focus from temporary troubles to eternal truth</li>
+            <li>It reminds us of God's sovereignty and care</li>
+            <li>It provides wisdom for difficult decisions</li>
+            <li>It fills us with hope beyond our present circumstances</li>
+          </ul>
+          
+          <p class="mb-4">Psalm 119:105 tells us, "Your word is a lamp to my feet and a light to my path." When life feels dark or uncertain, scripture illuminates our way forward.</p>
+          
+          <blockquote class="border-l-4 border-treasured-300 pl-4 italic my-6">
+            "Scripture is God's love letter to us, offering guidance for our journey and rest for our souls."
+          </blockquote>
+          
+          <p>Today, try setting aside time to read scripture not just for information, but for transformation. Allow God's Word to sink deeply into your heart, bringing rest to your weary soul and renewed perspective to your daily challenges.</p>
+        `,
+        scripture: "Matthew 11:28-30, Psalm 119:105"
+      }
+    ];
+    
+    // Helper functions
+    function renderDevotionalsList() {
+      return `
+        <section class="devotionals-hero">
+          <div class="container">
+            <div class="mx-auto" style="max-width: 48rem;">
+              <h1>Daily Devotionals</h1>
+              <p>Feed your spirit with these daily devotionals designed to inspire and encourage your walk with Christ.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="container">
+          <div class="devotionals-grid">
+            ${devotionals.map(devotional => `
+              <div class="card" onclick="navigateTo('devotional', '${devotional.id}')">
+                <div class="card-image">
+                  <img src="${devotional.image}" alt="${devotional.title}">
+                </div>
+                <div class="card-header">
+                  <h3 class="card-title">${devotional.title}</h3>
+                </div>
+                <div class="card-content">
+                  <p class="card-excerpt">${devotional.excerpt}</p>
+                  <div class="card-meta">
+                    <span class="meta-item">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"></rect><line x1="16" x2="16" y1="2" y2="6"></line><line x1="8" x2="8" y1="2" y2="6"></line><line x1="3" x2="21" y1="10" y2="10"></line></svg>
+                      ${devotional.date}
+                    </span>
+                    <span class="meta-item">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                      ${devotional.readTime}
+                    </span>
+                  </div>
+                </div>
+                <div class="card-footer">
+                  <button class="btn btn-outline" style="width: 100%; display: flex; justify-content: space-between;">
+                    Read Devotional
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                  </button>
+                </div>
+              </div>
+            `).join('')}
+          </div>
+        </section>
+      `;
+    }
+    
+    function renderDevotionalDetail(id) {
+      const devotional = devotionals.find(d => d.id === id);
+      
+      if (!devotional) {
+        return `
+          <div class="container" style="padding-top: 8rem; text-align: center;">
+            <h1 style="margin-bottom: 1rem;">Devotional Not Found</h1>
+            <p style="margin-bottom: 2rem;">We couldn't find the devotional you're looking for.</p>
+            <button class="btn btn-primary" onclick="navigateTo('devotionals')">Return to Devotionals</button>
+          </div>
+        `;
+      }
+      
+      return `
+        <div class="devotional-hero">
+          <img 
+            src="${devotional.image}" 
+            alt="${devotional.title}" 
+            class="devotional-hero-image"
+          />
+          <div class="devotional-hero-overlay"></div>
+          <div class="devotional-hero-content">
+            <div class="container">
+              <a href="javascript:void(0)" onclick="navigateTo('devotionals')" class="devotional-back-link">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 0.5rem;"><path d="m12 19-7-7 7-7"></path><path d="M19 12H5"></path></svg>
+                Back to Devotionals
+              </a>
+              <h1 class="devotional-title">${devotional.title}</h1>
+              <div class="devotional-meta">
+                <span class="meta-item">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"></rect><line x1="16" x2="16" y1="2" y2="6"></line><line x1="8" x2="8" y1="2" y2="6"></line><line x1="3" x2="21" y1="10" y2="10"></line></svg>
+                  ${devotional.date}
+                </span>
+                <span class="meta-item">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                  ${devotional.readTime}
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="devotional-content">
+          <div class="devotional-content-inner">
+            <div class="devotional-scripture">
+              <span class="devotional-scripture-text">Scripture: ${devotional.scripture}</span>
+              <button class="devotional-save-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"></path></svg>
+                Save
+              </button>
+            </div>
+            
+            <div class="devotional-text">
+              ${devotional.content}
+            </div>
+            
+            <div class="devotional-footer">
+              <div class="devotional-footer-buttons">
+                <button class="btn btn-primary" onclick="navigateTo('devotionals')">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 0.5rem;"><path d="m12 19-7-7 7-7"></path><path d="M19 12H5"></path></svg>
+                  All Devotionals
+                </button>
+                
+                <button class="btn btn-outline">
+                  Share Devotional
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+    
+    // Routing function
+    function navigateTo(route, id = null) {
+      const app = document.getElementById('app');
+      
+      switch(route) {
+        case 'devotionals':
+          app.innerHTML = renderDevotionalsList();
+          break;
+        case 'devotional':
+          app.innerHTML = renderDevotionalDetail(id);
+          break;
+        default:
+          app.innerHTML = renderDevotionalsList();
+      }
+      
+      // Scroll to top
+      window.scrollTo(0, 0);
+    }
+    
+    // Mobile menu toggle
+    document.getElementById('mobile-menu-toggle').addEventListener('click', function() {
+      const mobileMenu = document.getElementById('mobile-menu');
+      mobileMenu.classList.toggle('active');
+      
+      // Change icon
+      const icon = this.querySelector('svg');
+      if (mobileMenu.classList.contains('active')) {
+        icon.outerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg>';
+      } else {
+        icon.outerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>';
+      }
+    });
+    
+    // Set current year in footer
+    document.getElementById('current-year').textContent = new Date().getFullYear();
+    
+    // Initialize the app with devotionals list
+    document.addEventListener('DOMContentLoaded', function() {
+      navigateTo('devotionals');
+    });
+  </script>
+</body>
+</html>
